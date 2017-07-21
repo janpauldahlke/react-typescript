@@ -26,7 +26,7 @@ export class Header extends React.Component<Header.Props, Header.State> {
 
 
         return (
-            <div className={[style.header, "panel-footer"].join(' ')}>
+            <div className={[style.header, "panel-header"].join(' ')}>
                 <div>iam header</div>
             </div>
         );

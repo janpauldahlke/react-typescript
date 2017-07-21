@@ -1,13 +1,21 @@
 import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { RouteComponentProps } from 'react-router';
+import { Route, RouteComponentProps, Switch } from 'react-router';
 import { RootState } from '../../reducers';
 
 //
-import { Footer, Header } from '../../components';
+import { Footer, Header, Forbidden, NotFound } from '../../components';
+import * as style from './style.css';
 
-
+//somethink functional
+const PlaceHolder = () => {
+  return (
+    <div>
+      <div>iam from path / and survived render once and once agaion</div>
+    </div>
+  );
+};
 
 export namespace App {
   export interface Props extends RouteComponentProps<void> {
@@ -21,16 +29,22 @@ export namespace App {
 
 @connect(mapStateToProps, mapDispatchToProps)
 export class App extends React.Component<App.Props, App.State> {
-
   render() {
-      return (
-          <div>
-            <Header/>
-              <h3>headline</h3>
-            <Footer />
-          </div>
-
-      );
+    return (
+      <div className="app">
+        <Header />
+        <div className={[style.app_body, "panel-body"].join(' ')} >
+          <main>
+            <Switch>
+              <Route path="/" exact render={() => <PlaceHolder />} />
+              <Route path="/error/403" render={() => <Forbidden/> } />
+              <Route path="/*" render={() => <NotFound/>} />
+            </Switch>
+          </main>
+        </div>
+        <Footer />
+      </div>
+    );
   }
 }
 
