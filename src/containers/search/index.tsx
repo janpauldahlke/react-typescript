@@ -1,13 +1,11 @@
-//create a stoopid header
-
 import * as React from 'react';
 import {connect} from 'react-redux';
-import * as style from './style.css';
 
+import { SearchField } from './../../components/search/SearchField';
 
-export namespace Header {
+export namespace Search {
     export interface Props {
-
+        searchResult?: SearchResultStoreState
     }
 
     export interface State {
@@ -15,19 +13,20 @@ export namespace Header {
 }
 
 //@connect(mapStateToProps, mapDispatchToProps)
-export class Header extends React.Component<Header.Props, Header.State> {
+export class Search extends React.Component<Search.Props, Search.State> {
     constructor(props) {
         super(props)
     }
 
-    public static defaultProps: Partial<Header.Props> = {};
+    public static defaultProps: Partial<Search.Props> = {};
 
     render() {
 
 
         return (
-            <div className={[style.header, "panel-heading"].join(' ')}>
-                <div>iam header</div>
+            <div className="search-container">
+                iam Search
+                <SearchField/>
             </div>
         );
     }

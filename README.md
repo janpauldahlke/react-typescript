@@ -1,3 +1,6 @@
+###
+simply having fun with typescripted react
+
 
 ## Setup
 
@@ -8,7 +11,7 @@ $ npm install
 ## Running
 
 ```
-$ npm start
+$ npm run start
 ```
 
 ## Build

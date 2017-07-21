@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import { Route, RouteComponentProps, Switch } from 'react-router';
 import { RootState } from '../../reducers';
 
+
 //
 import { Footer, Header, Forbidden, NotFound } from '../../components';
 import * as style from './style.css';
+
+import {Search} from './../search/';
 
 //somethink functional
 const PlaceHolder = () => {
@@ -29,6 +32,7 @@ export namespace App {
 
 @connect(mapStateToProps, mapDispatchToProps)
 export class App extends React.Component<App.Props, App.State> {
+
   render() {
     return (
       <div className="app">
@@ -36,9 +40,12 @@ export class App extends React.Component<App.Props, App.State> {
         <div className={[style.app_body, "panel-body"].join(' ')} >
           <main>
             <Switch>
-              <Route path="/" exact render={() => <PlaceHolder />} />
-              <Route path="/error/403" render={() => <Forbidden/> } />
-              <Route path="/*" render={() => <NotFound/>} />
+
+              <Route path="/search" component={Search} />
+              <Route path="/error/403" component={Forbidden}  />
+              <Route path="/" exact component={PlaceHolder} />} />
+              <Route path="/*" component={NotFound} />
+
             </Switch>
           </main>
         </div>

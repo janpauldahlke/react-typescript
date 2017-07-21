@@ -1,4 +1,9 @@
 .app_body {
+    /* rethink position here! there is a better solution*/
     position: relative;
-    top: 40px;
+    top:40px;
+    display: flex;
+    flex-grow:1;
+    flex-direction: row;
+    overflow-x: hidden;
 }
