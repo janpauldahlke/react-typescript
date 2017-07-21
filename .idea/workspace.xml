@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9950f492-e531-4378-85fd-b7867ea448aa" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/actions/todos.ts" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/todos.ts" afterPath="$PROJECT_DIR$/src/actions/todos.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/constants/actions.ts" afterPath="$PROJECT_DIR$/src/constants/actions.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/constants/filters.ts" afterPath="$PROJECT_DIR$/src/constants/filters.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,16 +22,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="todos.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/actions/todos.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -199,12 +187,6 @@
               <item name="react-typescript_boilerplate" type="b2602c69:ProjectViewProjectNode" />
               <item name="react-typescript_boilerplate" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="actions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-typescript_boilerplate" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-typescript_boilerplate" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -280,7 +262,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1500617385657</updated>
-      <workItem from="1500617387012" duration="868000" />
+      <workItem from="1500617387012" duration="900000" />
     </task>
     <task id="LOCAL-00001" summary="getting rid of old foo">
       <created>1500618191830</created>
@@ -289,11 +271,18 @@
       <option name="project" value="LOCAL" />
       <updated>1500618191830</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="getting rid of old foo">
+      <created>1500618258316</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1500618258316</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="868000" />
+    <option name="totallyTimeSpent" value="900000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="27" width="1920" height="1053" extended-state="6" />
