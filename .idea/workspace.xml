@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9950f492-e531-4378-85fd-b7867ea448aa" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/reducers/queryParamter.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/search.ts" afterPath="$PROJECT_DIR$/src/actions/search.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/search/SearchField.tsx" afterPath="$PROJECT_DIR$/src/components/search/SearchField.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/middleware/logger.ts" afterPath="$PROJECT_DIR$/src/middleware/logger.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/index.ts" afterPath="$PROJECT_DIR$/src/reducers/index.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store/index.ts" afterPath="$PROJECT_DIR$/src/store/index.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -100,16 +95,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-468">
-              <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="search.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/actions/search.ts">
           <provider selected="true" editor-type-id="text-editor">
@@ -122,7 +107,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/store/index.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
@@ -130,6 +115,16 @@
               <folding>
                 <element signature="e#0#60#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -163,7 +158,6 @@
         <option value="$PROJECT_DIR$/src/components/header/index.tsx" />
         <option value="$PROJECT_DIR$/src/containers/App/style.css" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/containers/App/index.tsx" />
         <option value="$PROJECT_DIR$/src/components/header/style.css" />
         <option value="$PROJECT_DIR$/src/components/footer/style.css" />
@@ -177,6 +171,7 @@
         <option value="$PROJECT_DIR$/src/reducers/queryParamter.ts" />
         <option value="$PROJECT_DIR$/src/reducers/index.ts" />
         <option value="$PROJECT_DIR$/src/store/index.ts" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -321,7 +316,7 @@
       <option name="presentableId" value="Default" />
       <updated>1500617385657</updated>
       <workItem from="1500617387012" duration="15010000" />
-      <workItem from="1500876869653" duration="14115000" />
+      <workItem from="1500876869653" duration="14201000" />
     </task>
     <task id="LOCAL-00001" summary="getting rid of old foo">
       <created>1500618191830</created>
@@ -379,11 +374,18 @@
       <option name="project" value="LOCAL" />
       <updated>1500890189321</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="add thunk middleware to store to avoid error msg, actions as plain object not as function">
+      <created>1500895541328</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1500895541328</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29125000" />
+    <option name="totallyTimeSpent" value="29211000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="27" width="1920" height="1053" extended-state="6" />
@@ -423,7 +425,8 @@
     <MESSAGE value="prepare searchfields state" />
     <MESSAGE value="props again" />
     <MESSAGE value="props again // think!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="props again // think!!" />
+    <MESSAGE value="add thunk middleware to store to avoid error msg, actions as plain object not as function" />
+    <option name="LAST_COMMIT_MESSAGE" value="add thunk middleware to store to avoid error msg, actions as plain object not as function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -645,14 +648,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="8" lean-forward="false" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/footer/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -784,6 +779,14 @@
           <folding>
             <element signature="e#0#60#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
