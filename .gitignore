@@ -6,4 +6,4 @@ npm-debug.log
 /dist/**
 
 #intelliJ
-/.idea/**
+.idea/
