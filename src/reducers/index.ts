@@ -1,11 +1,14 @@
 import { combineReducers, Reducer } from 'redux';
-import SearchResult from './searchResult';
+import searchResult from './searchResult';
+import completeQuery from './queryParamter';
 
 
 export interface RootState {
-  searchResult: SearchResult
+  searchResult: SearchResultStoreState,
+  completeQUery: CompleteQuery
 }
 
 export default combineReducers<RootState>({
-  SearchResult
+    searchResult,
+    completeQuery
 });

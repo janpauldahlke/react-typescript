@@ -14,20 +14,19 @@ export function getAxiosInstance() {
     });
 }
 
-export function searchQuery(q: CompleteQuery) {
+export function searchQuery(query: CompleteQuery) {
     return function(dispatch) {
         dispatch(searchQueryAction);
-        return getAxiosInstance().get(URL, {params: q})
+        return getAxiosInstance().get(URL, {params: query})
             .then((response) => {
             dispatch(searchQueryActionSuccess(response.data));
-            dispatch(searchQueryParameter(q));
+            dispatch(searchQueryParameter(query));
             })
             .catch((error) => {
             dispatch(searchQueryActionFailure(error.toString()));
             })
     }
 }
-
 
 export const searchQueryParameter = createAction<CompleteQuery>(Actions.SEARCH_QUERY_PARAMETER);
 export const searchQueryAction = createAction(Actions.SEARCH_QUERY_ACTION);

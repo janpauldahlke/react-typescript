@@ -9,22 +9,27 @@ import searchResultReducer from "../../reducers/searchResult";
 
 export namespace SearchField {
     export interface Props {
-        searchActions?: typeof searchActions
-        result?: SearchResultStoreState
+        searchAction?: typeof searchActions
+        searchResult?: SearchResultStoreState
     }
 
     export interface State {
-        result : CompleteQuery
+        searchResult : CompleteQuery
     }
 }
 
-//@connect(mapStateToProps, mapDispatchToProps) //better connect to exporet default
+@connect(mapStateToProps, mapDispatchToProps) //better connect to exporet default
 export class SearchField extends React.Component<SearchField.Props, SearchField.State> {
+
+    public static defaultProps: Partial<SearchField.Props> = {
+
+    };
+
     constructor(props) {
         super(props);
 
         this.state = {
-            result : {
+            searchResult : {
                 q: ''
             }
         }
@@ -34,29 +39,32 @@ export class SearchField extends React.Component<SearchField.Props, SearchField.
     }
 
 
+    componentWillReceiveProps() {
+        //console.log('recive updates:', this.props)
+    }
+
     onSearchInputChange(e){
         e.preventDefault();
-        this.setState({result: {q: e.target.value}});
+        this.setState({searchResult: {q: e.target.value}});
     }
 
     onInputValueSubmit(e) {
         e.preventDefault();
-        let query = JSON.parse(JSON.stringify(this.state));
-        //this.props.searchActions.searchQuery(this.state.result.q);
+
+        //let query = JSON.parse(JSON.stringify(this.state));
         //console.log('unmodified state', this.state);
-        console.log('modified? state', query);
-        this.props.searchActions.searchQuery(query);
+        //console.log('modified? state', query);
+
+        this.props.searchAction.searchQuery(this.state.searchResult);
     }
-
-    public static defaultProps: Partial<SearchField.Props> = {
-
-    };
 
     renderResult(item: SearchResultItem) {
         return <div>item.ns</div>
     }
 
     render() {
+
+        //console.log('props__', this.props);
 
         return (
             <div className="searchfield-container">
@@ -71,11 +79,11 @@ export class SearchField extends React.Component<SearchField.Props, SearchField.
                     />
                 </form>
 
-                {/*<div className="resultTiles">*/}
-                    {/*{this.props.searchResult.result.documents.map((item) => {*/}
+                <div className="resultTiles">
+                    {/*{this.props.result.result.documents.map((item) => {*/}
                         {/*this.renderResult(item);*/}
                     {/*})}*/}
-                {/*</div>*/}
+                </div>
             </div>
         );
     }
@@ -84,16 +92,15 @@ export class SearchField extends React.Component<SearchField.Props, SearchField.
 
 function mapStateToProps(state: RootState) {
     return {
-        result: state.searchResult
+        searchResult: state.searchResult
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(searchActions as any, dispatch),
-
+        searchAction: bindActionCreators(searchActions as any, dispatch)
     }
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(SearchField);
+//export default connect(mapStateToProps,mapDispatchToProps)(SearchField);
