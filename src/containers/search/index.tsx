@@ -5,7 +5,7 @@ import { SearchField } from './../../components/search/SearchField';
 
 export namespace Search {
     export interface Props {
-        searchResult?: SearchResultStoreState
+
     }
 
     export interface State {

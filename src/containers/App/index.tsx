@@ -38,7 +38,7 @@ export class App extends React.Component<App.Props, App.State> {
       <div className="app">
         <Header />
         <div className={[style.app_body, "panel-body"].join(' ')} >
-          <main>
+          <main className="mx-auto">
             <Switch>
 
               <Route path="/search" component={Search} />

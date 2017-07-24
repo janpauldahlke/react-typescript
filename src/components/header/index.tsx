@@ -26,7 +26,7 @@ export class Header extends React.Component<Header.Props, Header.State> {
 
 
         return (
-            <div className={[style.header, "panel-heading"].join(' ')}>
+            <div className={[style.header, "panel-headingnavbar navbar-light bg-faded"].join(' ')}>
                 <div>iam header</div>
             </div>
         );

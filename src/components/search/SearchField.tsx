@@ -61,7 +61,7 @@ export class SearchField extends React.Component<SearchField.Props, SearchField.
 
     renderResult(item: SearchResultItem) {
         return (
-          <div key={item.id} className="card">
+          <div key={item.id} className="card col-8 mx-auto">
               <div className="card-block">
                   <div
                       className="card-title">
@@ -84,9 +84,10 @@ export class SearchField extends React.Component<SearchField.Props, SearchField.
     render() {
 
         return (
-            <div className="searchfield-container form-group">
+            <div className="container">
 
                 <form
+                    className="form-group row"
                     onSubmit={this.onInputValueSubmit}
                 >
                     <input
@@ -95,14 +96,13 @@ export class SearchField extends React.Component<SearchField.Props, SearchField.
                         placeholder="suche nach..."
                     />
 
-
                 </form>
 
                 {!this.props.searchResult.result && (
                     this.renderNoResult()
                 )}
                 {(this.props.searchResult.result) && (
-                    <div className="resultTiles">
+                    <div className="resultTiles row justify-content">
                         {this.props.searchResult.result.documents.map((item) => {
                           return this.renderResult(item);
                             // return <div>{item.ns}</div>
