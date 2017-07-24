@@ -7,6 +7,19 @@ import { bindActionCreators} from 'redux';
 import searchResultReducer from "../../reducers/searchResult";
 
 
+//https://github.com/JedWatson/react-select/blob/master/examples/src/components/Multiselect.js
+import * as Select from 'react-select';
+
+
+const advancedOptionValues = [
+    {label: 'creator', value: 'creator'},
+    {label: 'architect', value: 'architect'},
+    {label: 'deal', value: 'deal'}
+    // {label: 'highlight', value: 'creator'}
+];
+
+
+
 export namespace SearchField {
     export interface Props {
         searchAction?: typeof searchActions
@@ -14,9 +27,14 @@ export namespace SearchField {
     }
 
     export interface State {
-        searchResult : CompleteQuery
+        options: object[],
+        searchResult : CompleteQuery,
+        val: string
     }
 }
+
+
+
 
 @connect(mapStateToProps, mapDispatchToProps) //better connect to exporet default
 export class SearchField extends React.Component<SearchField.Props, SearchField.State> {
@@ -29,6 +47,8 @@ export class SearchField extends React.Component<SearchField.Props, SearchField.
         super(props);
 
         this.state = {
+            options: advancedOptionValues,
+            val: '',
             searchResult : {
                 q: ''
             }
@@ -36,6 +56,7 @@ export class SearchField extends React.Component<SearchField.Props, SearchField.
 
         this.onSearchInputChange = this.onSearchInputChange.bind(this);
         this.onInputValueSubmit = this.onInputValueSubmit.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
     }
 
 
@@ -53,6 +74,10 @@ export class SearchField extends React.Component<SearchField.Props, SearchField.
         //console.log('modified? state', query);
         //! two way bindings in react!!
         this.props.searchAction.searchQuery(this.state.searchResult);
+    }
+
+    handleSelectChange() {
+        console.log('message from function handleSelectChange')
     }
 
     renderNoResult () {
@@ -76,10 +101,27 @@ export class SearchField extends React.Component<SearchField.Props, SearchField.
         );
     }
 
+    renderAdvancedOptions () {
+        return (
+            <Select
+                multi
+                simpleValue
+                value={this.state.val}
+                placeholder="multiselect area 51"
+                options={this.state.options}
+                onChange={this.handleSelectChange}
+            >
+                <div>headline select</div>
+
+            </Select>
+        );
+    }
+
 
     //TODO enhance render with advanced options
     //build html elements // reactstrap?
     //build methods, to complete concated searchQuery
+    //TODO onHold here, do ppp-s deploy
 
     render() {
 
@@ -95,8 +137,11 @@ export class SearchField extends React.Component<SearchField.Props, SearchField.
                         onChange={this.onSearchInputChange}
                         placeholder="suche nach..."
                     />
+                    
+                    {this.renderAdvancedOptions}
 
                 </form>
+
 
                 {!this.props.searchResult.result && (
                     this.renderNoResult()
