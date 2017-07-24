@@ -14,12 +14,13 @@ export function getAxiosInstance() {
     });
 }
 
-export function searchQuery(q: CompleteQuery ) {
+export function searchQuery(q: CompleteQuery) {
     return function(dispatch) {
         dispatch(searchQueryAction);
         return getAxiosInstance().get(URL, {params: q})
             .then((response) => {
-            dispatch(searchQueryActionSuccess)
+            dispatch(searchQueryActionSuccess(response.data));
+            dispatch(searchQueryParameter(q));
             })
             .catch((error) => {
             dispatch(searchQueryActionFailure(error.toString()));
@@ -28,6 +29,8 @@ export function searchQuery(q: CompleteQuery ) {
 }
 
 
+export const searchQueryParameter = createAction<CompleteQuery>(Actions.SEARCH_QUERY_PARAMETER);
 export const searchQueryAction = createAction(Actions.SEARCH_QUERY_ACTION);
 export const searchQueryActionSuccess = createAction<SearchResult>(Actions.SEARCH_QUERY_ACTION_SUCCESS);
-export const searchQueryActionFailure = createAction<any>(Actions.SEARCH_QUERY_ACTION_FAILURE)
+export const searchQueryActionFailure = createAction<any>(Actions.SEARCH_QUERY_ACTION_FAILURE);
+
