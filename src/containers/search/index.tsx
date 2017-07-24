@@ -25,7 +25,7 @@ export class Search extends React.Component<Search.Props, Search.State> {
 
         return (
             <div className="search-container">
-                iam Search
+                {/*<h4>credo: Sapere Aude</h4>*/}
                 <SearchField/>
             </div>
         );

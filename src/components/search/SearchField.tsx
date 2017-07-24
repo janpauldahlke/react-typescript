@@ -39,10 +39,6 @@ export class SearchField extends React.Component<SearchField.Props, SearchField.
     }
 
 
-    componentWillReceiveProps() {
-        //console.log('recive updates:', this.props)
-    }
-
     onSearchInputChange(e){
         e.preventDefault();
         this.setState({searchResult: {q: e.target.value}});
@@ -59,28 +55,51 @@ export class SearchField extends React.Component<SearchField.Props, SearchField.
         this.props.searchAction.searchQuery(this.state.searchResult);
     }
 
-    renderResult(item: SearchResultItem) {
-        return <div>{item.eMail}</div>
+    renderNoResult () {
+        return <div>no results yet</div>
     }
+
+    renderResult(item: SearchResultItem) {
+        return (
+          <div key={item.id} className="card">
+              <div className="card-block">
+                  <div
+                      className="card-title">
+                      {item.ns}
+                  </div>
+                  <p className="card-text">{item.eMail}</p>
+                  <p className="card-text">{item.name}</p>
+                  <p className="card-text">{item.licenseKey}</p>
+
+              </div>
+          </div>
+        );
+    }
+
+
+    //TODO enhance render with advanced options
+    //build html elements // reactstrap?
+    //build methods, to complete concated searchQuery
 
     render() {
 
         return (
-            <div className="searchfield-container">
-                <h3>iam searchfield</h3>
+            <div className="searchfield-container form-group">
 
                 <form
                     onSubmit={this.onInputValueSubmit}
                 >
                     <input
-                        className="searchinput"
+                        className="searchinput form-control"
                         onChange={this.onSearchInputChange}
                         placeholder="suche nach..."
                     />
+
+
                 </form>
 
                 {!this.props.searchResult.result && (
-                    <div>no results yet</div>
+                    this.renderNoResult()
                 )}
                 {(this.props.searchResult.result) && (
                     <div className="resultTiles">
