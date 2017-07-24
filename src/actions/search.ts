@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {createAction} from "redux-actions";
 import * as Actions from './../constants/actions';
+import {error} from "util";
 
 
 const BASE_URL = 'http://192.168.1.239:9000';
@@ -19,6 +20,9 @@ export function searchQuery(q: CompleteQuery ) {
         return getAxiosInstance().get(URL, {params: q})
             .then((response) => {
             dispatch(searchQueryActionSuccess)
+            })
+            .catch((error) => {
+            dispatch(searchQueryActionFailure(error.toString()));
             })
     }
 }
