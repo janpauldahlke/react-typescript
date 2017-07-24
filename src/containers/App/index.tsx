@@ -6,7 +6,8 @@ import { RootState } from '../../reducers';
 
 
 //
-import { Footer, Header, Forbidden, NotFound } from '../../components';
+import { Footer, Header, Forbidden, NotFound, Weather } from '../../components';
+
 import * as style from './style.css';
 
 import {Search} from './../search/';
@@ -41,6 +42,7 @@ export class App extends React.Component<App.Props, App.State> {
           <main className="mx-auto">
             <Switch>
 
+              <Route path="/weather" component={Weather} />
               <Route path="/search" component={Search} />
               <Route path="/error/403" component={Forbidden}  />
               <Route path="/" exact component={PlaceHolder} />} />
