@@ -1,14 +1,19 @@
 import { combineReducers, Reducer } from 'redux';
 import searchResult from './searchResult';
-import completeQuery from './queryParamter';
+import completeQuery from './queryParameter';
+import weather from './weather';
+
 
 
 export interface RootState {
   searchResult: SearchResultStoreState,
-  completeQUery: CompleteQuery
+  completeQuery: CompleteQuery,
+  weather: WeatherResultStoreState
+
 }
 
 export default combineReducers<RootState>({
     searchResult,
-    completeQuery
+    completeQuery,
+    weather
 });

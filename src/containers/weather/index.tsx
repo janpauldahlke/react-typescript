@@ -41,6 +41,6 @@ export class Search extends React.Component<Search.Props, Search.State> {
 //
 // function mapDispatchToProps(dispatch) {
 //     return {
-//         //actions: bindActionCreators(<ActionName> as any, dispatch)
+//         actions: bindActionCreators(<ActionName> as any, dispatch)
 //     }
 // }

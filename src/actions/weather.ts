@@ -18,7 +18,7 @@ export function getAxiosInstance() {
     });
 }
 
-export function fetchWeather(city: string) {
+export function fetchWeatherFunc(city: string) {
 
     //create complet string
     const url = `${ROOT_URL}&q=${city},DEU&units=metric`; // DEU und metrix dyamisch und übergeben! // &lang=ger is also possible
@@ -27,6 +27,7 @@ export function fetchWeather(city: string) {
         dispatch(fetchWeatherAction);
         return getAxiosInstance().get(url)
             .then((response) => {
+                console.log('1_ ACTION_ :fetchWeatherSuccess', response.data);
                 dispatch(fetchWeatherSuccess(response.data));
             })
             .catch((error) => {
@@ -36,6 +37,6 @@ export function fetchWeather(city: string) {
 }
 
 
-export const fetchWeatherAction = createAction<any>(Actions.FETCH_WEATHER_ACTION);
-export const fetchWeatherSuccess = createAction<any>(Actions.FETCH_WEATHER_SUCCESS);
+export const fetchWeatherAction = createAction(Actions.FETCH_WEATHER_ACTION);
+export const fetchWeatherSuccess = createAction<WeatherResult>(Actions.FETCH_WEATHER_SUCCESS);
 export const fetWeatherFailure = createAction<any>(Actions.FETCH_WEATHER_FAILURE);
