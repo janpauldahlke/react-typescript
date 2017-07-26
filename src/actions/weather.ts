@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {createAction} from "redux-actions";
 import * as Actions from './../constants/actions';
-import * as SECRET from './../config';
+import * as SECRET from '../../config';
 
 // make this selectable
 // xxx/forecast? -> 5tage alle drei stunden

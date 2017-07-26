@@ -10,6 +10,7 @@ import {RootState} from "../../reducers/index";
 import * as style from './style.css';
 import {isNullOrUndefined} from "util";
 
+import * as _ from 'lodash';
 
 export namespace Weather {
     export interface Props {
@@ -31,6 +32,7 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
             city: '',
         };
 
+        this.renderProps = this.renderProps.bind(this);
         this.makeActualWeatherRequest = this.makeActualWeatherRequest.bind(this);
         this.onButtonSubmit = this.onButtonSubmit.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
@@ -55,11 +57,26 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
         this.props.weatherAction.fetchWeatherFunc(this.state.city);
     }
 
+    renderProps(item: WeatherResult) {
+
+
+       return (
+           <div>
+               <div> {item.name} </div>
+               <div> {item.weather.toString()} </div>
+               <div> {item.clouds.all}
+
+               {/*<div>{item.base}</div>
+               <div>{item.clouds.all}</div>
+               <div>{item.visibility}</div>
+               <div>{item.sys.message}</div>*/}
+           </div>
+       );
+
+    }
+
 
     render() {
-
-        // console.log("state",this.state);
-        //console.log("props",this.props);
 
         return (
             <div className={[style.container].join(' ')}>
@@ -79,12 +96,17 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
                     <div>no fetch yet</div>
                 )}
                 {this.props.fetchWeatherResult.success && (
+                    <div>{Object.(this.props.fetchWeatherResult.result).map()}
+                    </div>
 
-                    <div>name: {this.props.fetchWeatherResult.result.name}</div>
+
                 )}
 
             </div>
         );
+
+        // console.log("state",this.state);
+        //console.log("props",this.props);
     }
 }
 
