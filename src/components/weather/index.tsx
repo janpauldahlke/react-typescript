@@ -102,6 +102,8 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
                     </input>
                 </form>
 
+
+                
                 {!this.props.fetchWeatherResult.success && (
                     <div>no fetch yet</div>
                 )}
