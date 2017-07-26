@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9950f492-e531-4378-85fd-b7867ea448aa" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/weather/_index.tsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/weather/index.tsx" afterPath="$PROJECT_DIR$/src/components/weather/index.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/weather/style.css" afterPath="$PROJECT_DIR$/src/components/weather/style.css" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -35,8 +33,8 @@
       <file leaf-file-name="index.tsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/weather/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
-              <caret line="104" column="1" lean-forward="true" selection-start-line="104" selection-start-column="1" selection-end-line="104" selection-end-column="1" />
+            <state relative-caret-position="230">
+              <caret line="109" column="80" lean-forward="false" selection-start-line="109" selection-start-column="80" selection-end-line="109" selection-end-column="80" />
               <folding>
                 <element signature="e#1#32#0" expanded="true" />
               </folding>
@@ -369,11 +367,18 @@
       <option name="project" value="LOCAL" />
       <updated>1501070024144</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="at least a console log">
+      <created>1501073926558</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1501073926558</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78644000" />
+    <option name="totallyTimeSpent" value="81303000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="27" width="1920" height="1053" extended-state="6" />
@@ -454,7 +459,8 @@
     <MESSAGE value="am i doing this typscpt rite?" />
     <MESSAGE value="researching type guards" />
     <MESSAGE value="commit before refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit before refactoring" />
+    <MESSAGE value="at least a console log" />
+    <option name="LAST_COMMIT_MESSAGE" value="at least a console log" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -840,8 +846,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/weather/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="104" column="1" lean-forward="true" selection-start-line="104" selection-start-column="1" selection-end-line="104" selection-end-column="1" />
+        <state relative-caret-position="230">
+          <caret line="109" column="80" lean-forward="false" selection-start-line="109" selection-start-column="80" selection-end-line="109" selection-end-column="80" />
           <folding>
             <element signature="e#1#32#0" expanded="true" />
           </folding>

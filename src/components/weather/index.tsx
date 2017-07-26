@@ -6,6 +6,7 @@ import { bindActionCreators} from 'redux';
 import * as weatherActions from './../../actions/weather';
 import {RootState} from "../../reducers/index";
 import * as style from './style.css';
+import weather from "../../reducers/weather";
 
 
 
@@ -53,14 +54,51 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
         let { result } = this.props.fetchWeatherResult;
         let resultItems = Object.keys(result).map((key, index) => {
             const resultItem = result[key];
-            console.log('____from foo:_',resultItem, resultItems)
-            return (
-                <div
-                    key={index}
-                    datatype={resultItem}
-                >__</div>
-            )
+            console.log('____from foo:_',key, resultItem);
+
+            if(key === 'name'){
+                return <div>{index}</div>
+            }
+
+            // switch(key){
+            //     // case 'coord': return <div>coord lon: {resultItem.lon}, lat: {resultItem.lat}</div>;
+            //     case 'weater': return <div>iam weather object</div>;
+            //     // case 'base': return <div>{resultItem}</div>;
+            //     // case 'visibility': return <div>{resultItem}</div>;
+            //     // case 'clouds': return <div>cloudObject</div>;
+            //     // case 'dt': return <div>{resultItem}</div>;
+            //     // case 'sys': return <div>sysObject</div>;
+            //     // case 'id': return <div>{resultItem}</div>;
+            //     // case 'name': return <div>{resultItem}</div>;
+            //     // case 'cod': return  <div>{resultItem}</div>;
+            //     default: return <div>DEFAULT</div>
+            //
+            // }
+
         });
+    }
+
+    splitResults(){
+
+        const resultItems = this.props.fetchWeatherResult.result;
+        Object.keys(resultItems).map((key) => {
+            if(key === 'name'){
+                console.log('iam name')
+                return <div>name</div>
+            }
+            else {
+                console.log('iam NOOOOname')
+                return <div>no name</div>
+            }
+        })
+
+        // const weatherItem = this.props.fetchWeatherResult.result.weather;
+        // const coord = this.props.fetchWeatherResult.result.coord;
+        // const clouds = this.props.fetchWeatherResult.result.clouds;
+        // console.log(weatherItem, coord, clouds);
+
+
+
     }
 
     //---------------------------------//
@@ -69,7 +107,7 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
 
 
 
-
+        //TODO should on extract the result from input and import? give it a try
 
 
         return (
@@ -77,8 +115,8 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
                 <h3>iam weather...again</h3>
                 <div className="weatherinput">
                     <form
-                        onSubmit={this.performWeatherRequest}
-                    >
+                        onSubmit={this.performWeatherRequest}>
+
                         <input
                             placeholder="city"
                             onChange={this.onInputChange}
@@ -87,14 +125,13 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
                 </div>
 
                 <div className="weatheroutput">
-                        {!this.props.fetchWeatherResult.success && (
-                             <div>no result yet</div>
-                        )}
+                    {!this.props.fetchWeatherResult.success && (
+                         <div>no result yet</div>
+                    )}
 
-                        {this.props.fetchWeatherResult.success && (
-                            this.foo()
-                        )}
-
+                    {this.props.fetchWeatherResult.success && (
+                        <div>{this.splitResults}</div>
+                    )}
 
 
                 </div>
