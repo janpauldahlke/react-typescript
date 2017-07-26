@@ -6,7 +6,10 @@ import { bindActionCreators} from 'redux';
 import * as weatherActions from './../../actions/weather';
 import {RootState} from "../../reducers/index";
 import * as style from './style.css';
-import weather from "../../reducers/weather";
+import {WeatherResult} from './weatherResult';
+
+import * as _ from 'lodash';
+import {isNumber, isObject, isString} from "util";
 
 
 
@@ -96,16 +99,20 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
         // const coord = this.props.fetchWeatherResult.result.coord;
         // const clouds = this.props.fetchWeatherResult.result.clouds;
         // console.log(weatherItem, coord, clouds);
+    }
 
-
-
+    renderWeatherViewString(item){
+        return <div>name: {item}</div>
+    }
+    renderWeatherViewNumber(item){
+        return <div>number: {item}</div>
     }
 
     //---------------------------------//
 
     render() {
 
-
+        let counter = 0;
 
         //TODO should on extract the result from input and import? give it a try
 
@@ -125,14 +132,45 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
                 </div>
 
                 <div className="weatheroutput">
-                    {!this.props.fetchWeatherResult.success && (
-                         <div>no result yet</div>
-                    )}
+                    {/*{!this.props.fetchWeatherResult.success && (*/}
+                         {/*<div>no result yet</div>*/}
+                    {/*)}*/}
 
-                    {this.props.fetchWeatherResult.success && (
-                        <div>{this.splitResults}</div>
-                    )}
+                    {/*{this.props.fetchWeatherResult.success && (*/}
+                        {/*<div>{this.splitResults}</div>*/}
+                    {/*)}*/}
 
+                    {/*<WeatherResult />*/}
+                    {_.map(this.props.fetchWeatherResult.result).map((e) => {
+
+                        counter = counter +1;
+                        console.log('rounds_', counter);
+                        if(isString(e)){
+                            console.log('string_', e);
+                            return this.renderWeatherViewString(e);
+                        }
+                        else if(isObject(e)){
+                            console.log('object__', e)
+
+                            //TODO find a way top compare deepequal with typescript types
+
+                            // _.map(e).map(() => {
+                            //     if(isObject(e)){
+                            //         console.log('INNEROBJ_iam obj in obj, treat me special', e)
+                            //     }
+                            //     else{
+                            //         console.log('INNEROBJ', e)
+                            //     }
+                            // })
+                        }
+                        else if(isNumber(e)){
+                            console.log('number__', e);
+                            return this.renderWeatherViewNumber(e);
+                        }
+                        else{
+                            console.log('i am else', e)
+                        }
+                    })}
 
                 </div>
 
