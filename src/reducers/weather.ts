@@ -21,15 +21,15 @@ export default handleActions<WeatherResultStoreState, WeatherResult>({
             load: false,
             success: true,
             result:action.payload}
-        console.log('in my reducer: ',passReducer)
+        //console.log('in my reducer: ',passReducer)
         return passReducer;
     },
     [Actions.FETCH_WEATHER_ACTION]: (state) => {
-        console.log('FETCH_WEATHER_ACTION', state)
+        //console.log('FETCH_WEATHER_ACTION', state)
         return { ...state, load: true, success: false}
     },
     [Actions.FETCH_WEATHER_FAILURE]: (state) => {
-        console.log('FETCH_WEATHER_FAILURE', state)
+        //console.log('FETCH_WEATHER_FAILURE', state)
         return {...state, load: false, success: false}
     }
 }, initialStoreState)

@@ -27,7 +27,7 @@ export function fetchWeatherFunc(city: string) {
         dispatch(fetchWeatherAction);
         return getAxiosInstance().get(url)
             .then((response) => {
-                console.log('1_ ACTION_ :fetchWeatherSuccess', response.data);
+                //console.log('1_ ACTION_ :fetchWeatherSuccess', response.data);
                 dispatch(fetchWeatherSuccess(response.data));
             })
             .catch((error) => {

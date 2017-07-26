@@ -55,3 +55,5 @@ declare type WeatherResultStoreState = {
     success: boolean,
     result : WeatherResult
 }
+
+declare type KnownTypes= Main;
