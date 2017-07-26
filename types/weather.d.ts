@@ -56,4 +56,11 @@ declare type WeatherResultStoreState = {
     result : WeatherResult
 }
 
-declare type KnownTypes= Main;
+interface IWeather {
+    id: number,
+    main: string,
+    description: string,
+    icon: string
+}
+
+type Guard= Weather | Coord;

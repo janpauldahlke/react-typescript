@@ -8,11 +8,10 @@ import {RootState} from "../../reducers/index";
 
 
 import * as style from './style.css';
-import {isNullOrUndefined, isString} from "util";
+import {isArray, isNullOrUndefined, isObject, isString} from "util";
 
-import * as _ from 'lodash';
-import {ensureInstance} from "awesome-typescript-loader/dist/instance";
-import {isElementOfType} from "react-dom/test-utils";
+import typeGuard from '../../helper/typeguards';
+
 
 export namespace Weather {
     export interface Props {
@@ -72,16 +71,49 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
        );}
 
        renderLowLevelString(item: string){
+
             return(
-                <div key={item}>{item}</div>
+                <div key={(Math.floor(Math.random() * 100000)+1)}>{item}</div>
             );
        }
 
+       //make this to match only on Weather items
        renderWeatherItem(item: Weather){
            console.log(item)
            return(
-               <div>
+               <div key={(Math.floor(Math.random() * 100000)+1)}>
                    <p>{item}</p>
+               </div>
+           );
+       }
+
+       renderObjectItem(item: Object){
+
+           return(
+               <div>{Object.keys(item).map((objItem) => {
+                   return (
+                   <div key={(Math.floor(Math.random() * 100000)+1)}>
+                       <p>{objItem}</p>
+
+                       {/*<p>{item[objItem]}</p>*/}
+                   </div>
+                   )
+               })}
+               </div>
+           );
+       }
+
+       renderArrayItem(item: Array<any>){
+           return(
+               <div>
+                   {item.map((objArray) => {
+                       return(
+                           <div key={(Math.floor(Math.random() * 100000)+1)}>
+                               {objArray}
+                           </div>
+                       )
+
+                   })}
                </div>
            );
        }
@@ -103,7 +135,7 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
                 </form>
 
 
-                
+
                 {!this.props.fetchWeatherResult.success && (
                     <div>no fetch yet</div>
                 )}
@@ -112,17 +144,32 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
                     <div className="res">
                         {Object.keys(this.props.fetchWeatherResult.result).map((item) => {
                             if (isString(this.props.fetchWeatherResult.result[item])) {
+                                console.log('isString_____',this.props.fetchWeatherResult.result[item])
                                 return this.renderLowLevelString(this.props.fetchWeatherResult.result[item])
                             }
+                            if(isObject(this.props.fetchWeatherResult.result[item])){
+                                console.log('isObj______', this.props.fetchWeatherResult.result[item])
+                                return this.renderObjectItem(this.props.fetchWeatherResult.result[item]);
+                            }
+                            if(isArray(this.props.fetchWeatherResult.result[item])){
+                                console.log('isArr_____', this.props.fetchWeatherResult.result[item])
+                                return this.renderArrayItem(this.props.fetchWeatherResult.result[item]);
+                            }
+
+                            // console.log('tpyeof: ',  typeof  this.props.fetchWeatherResult.result[item]);
+                            // console.log('instance: ',  Weather instanceof this.props.fetchWeatherResult.result[item]);
 
                             //TODO research her
                             // https://www.typescriptlang.org/docs/handbook/advanced-types.html
                             // type guards is what i want
 
-                            if(typeof "Weather" === this.props.fetchWeatherResult.result[item]){
-                                console.log('weather_type_checked: ', this.props.fetchWeatherResult.result[item]);
-                                return this.renderWeatherItem(this.props.fetchWeatherResult.result[item]);
-                            }
+                            // if(this.props.fetchWeatherResult.result[item]){
+                            //     console.log('weather_type_checked: ', this.props.fetchWeatherResult.result[item]);
+                            //     return this.renderWeatherItem(this.props.fetchWeatherResult.result[item]);
+                            // }
+                            // if(typeGuard(this.props.fetchWeatherResult.result[item])){
+                            //     console.log(typeof item);
+                            // }
                         })}
                     </div>
                 )}
