@@ -52,24 +52,25 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
         this.props.weatherAction.fetchWeatherFunc(this.state.city);
     }
 
-
-
-
-
     renderWeatherViewString(v,k){
         return <div key={k} className="alert alert-success">{k} : {v}</div>
     }
     renderWeatherViewNumber(v,k){
         return <div key={k} className="alert alert-success">{k} : {v}</div>
     }
-    renderWeatherViewWeatherObject(value,key) {
-        return<div className="weatherObjectfromArray" key={key}>{key} : {value} </div>
+    renderWeatherViewWeatherObject(v,k) {
+        console.log('renderView');
+        return (
+                <div key={k}>{k} : {v}</div>
+        )
+    }
+    renderObjects(v,k){
+        return <div key={k} className="alert alert-success">{k} : {v}</div>
     }
 
     //---------------------------------//
 
     render() {
-
 
         return (
             <div className={[style.container].join(' ')}>
@@ -97,16 +98,23 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
                         else if(isObject(value)){
 
                             if ((key !== 'weather') && !isNullOrUndefined(value)){
-                                //
+                               return _.map(value, (v,k) => {
+                                    console.log('__', k,v);
+                                    return this.renderObjects(v,k);
+                                })
                             }
                             else if(key === 'weather'){
 
-                                _.map(value,(weather: Weather,key) => {
-                                    console.log('__1__',weather, key)
-                                  _.map(weather, (v,k) => {
-                                      console.info('__2__',v,k);
-                                      return this.renderWeatherViewWeatherObject(v,k);
-                                  })
+                                return _.map(value,(weather: Weather,key) => {
+
+                                  return(
+                                      <div className="alert alert-danger">
+                                          {_.map(weather, (v,k) => {
+                                              return this.renderWeatherViewWeatherObject(v,k);
+                                          })}
+                                      </div>
+                                  );
+
                                 });
                             }
 
