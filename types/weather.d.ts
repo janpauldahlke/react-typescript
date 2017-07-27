@@ -53,7 +53,8 @@ declare type WeatherResult = {
 declare type WeatherResultStoreState = {
     load: boolean,
     success: boolean,
-    result : WeatherResult
+    result : WeatherResult | WeatherForeCastResult
+    type: string
 }
 
 interface IWeather {
@@ -63,4 +64,6 @@ interface IWeather {
     icon: string
 }
 
-type Guard= Weather | Coord;
+declare type WeatherForeCastResult = {
+
+}

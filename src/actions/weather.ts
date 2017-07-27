@@ -28,7 +28,9 @@ export function fetchWeatherFunc(type: string, city: string, country: string = '
                         dispatch(fetchWeatherSuccess(response.data));
                         break;
                     case "forecast":
+                        console.log('action forecast', response.data);
                         dispatch(fetchWeatherActionForecast(response.data));
+                        break;
                     default:
                         dispatch(fetchWeatherSuccess(response.data));
                 }

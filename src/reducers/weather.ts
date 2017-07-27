@@ -8,7 +8,8 @@ import * as Actions from './../constants/actions'
 const initialStoreState : WeatherResultStoreState = {
     load: false,
     success: false,
-    result: null
+    result: null,
+    type: ''
 
 
 };
@@ -18,6 +19,7 @@ export default handleActions<WeatherResultStoreState, WeatherResult>({
 
         let passReducer = {
             ...state,
+            type: 'FETCH_WEATHER_SUCCESS',
             load: false,
             success: true,
             result:action.payload}
@@ -26,18 +28,19 @@ export default handleActions<WeatherResultStoreState, WeatherResult>({
     },
     [Actions.FETCH_WEATHER_ACTION]: (state) => {
         //console.log('FETCH_WEATHER_ACTION', state)
-        return { ...state, load: true, success: false}
+        return { ...state, load: true, success: false, type: 'FETCH_WEATHER_ACTION'}
     },
     [Actions.FETCH_WEATHER_FAILURE]: (state) => {
         //console.log('FETCH_WEATHER_FAILURE', state)
-        return {...state, load: false, success: false}
+        return {...state, load: false, success: false, type: 'FETCH_WEATHER_FAILURE'}
     },
     [Actions.FETCH_WEATHER_FORECAST]: (state, action) => {
         return {
             ...state,
             load: false,
             success: true,
-            result: action.payload
+            result: action.payload,
+            type: 'FETCH_WEATHER_FORECAST'
         }
     }
 }, initialStoreState)
