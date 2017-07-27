@@ -36,11 +36,14 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
             city: ''
         };
 
+        this.resetForm = this.resetForm.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
         this.performWeatherRequest = this.performWeatherRequest.bind(this);
+        this.performWeatherForeCast = this.performWeatherForeCast.bind(this);
     }
 
     //---------------------------------//
+
 
     onInputChange(e){
         e.preventDefault();
@@ -49,7 +52,12 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
 
     performWeatherRequest(e){
         e.preventDefault();
-        this.props.weatherAction.fetchWeatherFunc(this.state.city);
+        this.props.weatherAction.fetchWeatherFunc('weather', this.state.city);
+    }
+
+    performWeatherForeCast(e){
+        e.preventDefault();
+        this.props.weatherAction.fetchWeatherFunc('forecast', this.state.city);
     }
 
     renderWeatherViewString(v,k){
@@ -59,7 +67,6 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
         return <div key={k} className="alert alert-success">{k} : {v}</div>
     }
     renderWeatherViewWeatherObject(v,k) {
-        console.log('renderView');
         return (
                 <div key={k}>{k} : {v}</div>
         )
@@ -68,6 +75,16 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
         return <div key={k} className="alert alert-success">{k} : {v}</div>
     }
 
+    resetForm(e){
+        e.preventDefault();
+        this.setState({city: ''});
+        console.log(this.state.city);
+    }
+
+
+    //TODO research how to empty result component on updated state
+    // most likely i need an action reset, that sets payload to null
+    // something like this : if(!this.state.city){this.props.weatherActions.resetPayload}
     //---------------------------------//
 
     render() {
@@ -77,18 +94,26 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
                 <h3>iam weather...again</h3>
                 <div className="weatherinput">
                     <form
-
-                        onSubmit={this.performWeatherRequest}>
+                        onSubmit={(e) => {e.preventDefault()}}
+                       >
 
                         <input
                             className="ml-5"
                             placeholder="city"
+                            value={this.state.city}
                             onChange={this.onInputChange}
                         />
+
+                        <button
+
+                            onClick={this.performWeatherRequest}
+                        >get actual weather info</button>
                     </form>
                 </div>
                 <br/>
-                <div className="weatheroutput">
+
+                {/*https://stackoverflow.com/questions/21749798/how-can-i-reset-a-react-component-including-all-transitively-reachable-state/21750576#21750576*/}
+                <div key={Math.floor(Math.random() * 999) +1} className="weatheroutput">
                     {_.map(this.props.fetchWeatherResult.result, (value,key ) => {
 
                         if(isString(value)){
@@ -99,7 +124,7 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
 
                             if ((key !== 'weather') && !isNullOrUndefined(value)){
                                return _.map(value, (v,k) => {
-                                    console.log('__', k,v);
+
                                     return this.renderObjects(v,k);
                                 })
                             }
@@ -121,7 +146,6 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
                             else{
                                 return <div className="alert alert-danger">iam else</div>
                             }
-
                         }
                         else if(isNumber(value)){
                             return this.renderWeatherViewNumber(value,key);

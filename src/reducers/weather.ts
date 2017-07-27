@@ -31,5 +31,13 @@ export default handleActions<WeatherResultStoreState, WeatherResult>({
     [Actions.FETCH_WEATHER_FAILURE]: (state) => {
         //console.log('FETCH_WEATHER_FAILURE', state)
         return {...state, load: false, success: false}
+    },
+    [Actions.FETCH_WEATHER_FORECAST]: (state, action) => {
+        return {
+            ...state,
+            load: false,
+            success: true,
+            result: action.payload
+        }
     }
 }, initialStoreState)
