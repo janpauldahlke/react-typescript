@@ -6,10 +6,10 @@ import { bindActionCreators} from 'redux';
 import * as weatherActions from './../../actions/weather';
 import {RootState} from "../../reducers/index";
 import * as style from './style.css';
-import {WeatherResult} from './weatherResult';
+
 
 import * as _ from 'lodash';
-import {isNumber, isObject, isString} from "util";
+import {isNullOrUndefined, isNumber, isObject, isString} from "util";
 
 
 
@@ -53,68 +53,22 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
     }
 
 
-    foo(){
-        let { result } = this.props.fetchWeatherResult;
-        let resultItems = Object.keys(result).map((key, index) => {
-            const resultItem = result[key];
-            console.log('____from foo:_',key, resultItem);
 
-            if(key === 'name'){
-                return <div>{index}</div>
-            }
 
-            // switch(key){
-            //     // case 'coord': return <div>coord lon: {resultItem.lon}, lat: {resultItem.lat}</div>;
-            //     case 'weater': return <div>iam weather object</div>;
-            //     // case 'base': return <div>{resultItem}</div>;
-            //     // case 'visibility': return <div>{resultItem}</div>;
-            //     // case 'clouds': return <div>cloudObject</div>;
-            //     // case 'dt': return <div>{resultItem}</div>;
-            //     // case 'sys': return <div>sysObject</div>;
-            //     // case 'id': return <div>{resultItem}</div>;
-            //     // case 'name': return <div>{resultItem}</div>;
-            //     // case 'cod': return  <div>{resultItem}</div>;
-            //     default: return <div>DEFAULT</div>
-            //
-            // }
 
-        });
+    renderWeatherViewString(v,k){
+        return <div key={k} className="alert alert-success">{k} : {v}</div>
     }
-
-    splitResults(){
-
-        const resultItems = this.props.fetchWeatherResult.result;
-        Object.keys(resultItems).map((key) => {
-            if(key === 'name'){
-                console.log('iam name')
-                return <div>name</div>
-            }
-            else {
-                console.log('iam NOOOOname')
-                return <div>no name</div>
-            }
-        })
-
-        // const weatherItem = this.props.fetchWeatherResult.result.weather;
-        // const coord = this.props.fetchWeatherResult.result.coord;
-        // const clouds = this.props.fetchWeatherResult.result.clouds;
-        // console.log(weatherItem, coord, clouds);
+    renderWeatherViewNumber(v,k){
+        return <div key={k} className="alert alert-success">{k} : {v}</div>
     }
-
-    renderWeatherViewString(item){
-        return <div>name: {item}</div>
-    }
-    renderWeatherViewNumber(item){
-        return <div>number: {item}</div>
+    renderWeatherViewWeatherObject(value,key) {
+        return<div className="weatherObjectfromArray" key={key}>{key} : {value} </div>
     }
 
     //---------------------------------//
 
     render() {
-
-        let counter = 0;
-
-        //TODO should on extract the result from input and import? give it a try
 
 
         return (
@@ -122,56 +76,51 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
                 <h3>iam weather...again</h3>
                 <div className="weatherinput">
                     <form
+
                         onSubmit={this.performWeatherRequest}>
 
                         <input
+                            className="ml-5"
                             placeholder="city"
                             onChange={this.onInputChange}
                         />
                     </form>
                 </div>
-
+                <br/>
                 <div className="weatheroutput">
-                    {/*{!this.props.fetchWeatherResult.success && (*/}
-                         {/*<div>no result yet</div>*/}
-                    {/*)}*/}
+                    {_.map(this.props.fetchWeatherResult.result, (value,key ) => {
 
-                    {/*{this.props.fetchWeatherResult.success && (*/}
-                        {/*<div>{this.splitResults}</div>*/}
-                    {/*)}*/}
-
-                    {/*<WeatherResult />*/}
-                    {_.map(this.props.fetchWeatherResult.result, (k,v ) => {
-
-                        counter = counter +1;
-                        //console.log('rounds_', counter);
-                        if(isString(k)){
-                            console.log('string_', k, v);
-                            /*return this.renderWeatherViewString(e);*/
+                        if(isString(value)){
+                            return this.renderWeatherViewString(value,key);
                         }
-                        else if(isObject(k)){
-                            console.log('object__', v,k)
 
-                            //TODO find a way top compare deepequal with typescript types
+                        else if(isObject(value)){
 
-                            // _.map(e).map(() => {
-                            //     if(isObject(e)){
-                            //         console.log('INNEROBJ_iam obj in obj, treat me special', e)
-                            //     }
-                            //     else{
-                            //         console.log('INNEROBJ', e)
-                            //     }
-                            // })
+                            if ((key !== 'weather') && !isNullOrUndefined(value)){
+                                //
+                            }
+                            else if(key === 'weather'){
+
+                                _.map(value,(weather: Weather,key) => {
+                                    console.log('__1__',weather, key)
+                                  _.map(weather, (v,k) => {
+                                      console.info('__2__',v,k);
+                                      return this.renderWeatherViewWeatherObject(v,k);
+                                  })
+                                });
+                            }
+
+                            else{
+                                return <div className="alert alert-danger">iam else</div>
+                            }
+
                         }
-                        else if(isNumber(k)){
-                            console.log('number__', k,v);
-                            //return this.renderWeatherViewNumber(e);
+                        else if(isNumber(value)){
+                            return this.renderWeatherViewNumber(value,key);
                         }
                         else{
-                            console.log('i am else', k,v)
+                            console.log('i am else', value,key)
                         }
-
-
                     })}
 
                 </div>
