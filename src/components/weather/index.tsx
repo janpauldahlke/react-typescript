@@ -36,7 +36,7 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
             city: ''
         };
 
-        this.resetForm = this.resetForm.bind(this);
+        this.resetComponent = this.resetComponent.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
         this.performWeatherRequest = this.performWeatherRequest.bind(this);
         this.performWeatherForeCast = this.performWeatherForeCast.bind(this);
@@ -75,10 +75,12 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
         return <div key={k} className="alert alert-success">{k} : {v}</div>
     }
 
-    resetForm(e){
+
+    resetComponent(e){
         e.preventDefault();
+        console.log('resetComponent');
         this.setState({city: ''});
-        console.log(this.state.city);
+        return this.props.weatherAction.resetWeather();
     }
 
 
@@ -89,13 +91,14 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
 
     render() {
 
-        return (
-            <div className={[style.container].join(' ')}>
-                <h3>iam weather...again</h3>
+        const {success, load, result, type} = this.props.fetchWeatherResult
+
+        if(isNullOrUndefined(result) && load === false) {
+            return (
                 <div className="weatherinput">
                     <form
                         onSubmit={(e) => {e.preventDefault()}}
-                       >
+                    >
 
                         <input
                             className="ml-5"
@@ -110,71 +113,130 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
                         <button
                             onClick={this.performWeatherForeCast}
                         >forecast my city</button>
+                        <button
+                            onClick={this.resetComponent}
+                        >
+                            RESET
+                        </button>
                     </form>
                 </div>
-                <br/>
+            )
+        }
 
-                {/*https://stackoverflow.com/questions/21749798/how-can-i-reset-a-react-component-including-all-transitively-reachable-state/21750576#21750576*/}
+        if(load === true) {
+            return (
+                <div>LOADING</div>
+            )
+        }
 
-                {/*TODO*/}
-                {/*1. check response type (actual, forecast)*/}
-                {/*2. render according to result differnt tiles*/}
-                {/*3. ideal is to keep stateless components seperated*/}
+        if(success === false && load ===false) {
+            return(
+                <div>ERROR</div>
+            )
+        }
 
-                {this.props.fetchWeatherResult.type === 'FETCH_WEATHER_SUCCESS' && (
-                    <div key={Math.floor(Math.random() * 999) +1} className="weatheroutput">
-                        {_.map(this.props.fetchWeatherResult.result, (value,key ) => {
+        if(success === true && !isNullOrUndefined(result)) {
+            return (
+                <div className={[style.container].join(' ')}>
+                    <h3>iam weather...again</h3>
+                    <div className="weatherinput">
+                        <form
+                            onSubmit={(e) => {e.preventDefault()}}
+                        >
 
-                            if(isString(value)){
-                                return this.renderWeatherViewString(value,key);
-                            }
+                            <input
+                                className="ml-5"
+                                placeholder="city"
+                                value={this.state.city}
+                                onChange={this.onInputChange}
+                            />
 
-                            else if(isObject(value)){
-
-                                if ((key !== 'weather') && !isNullOrUndefined(value)){
-                                    return _.map(value, (v,k) => {
-
-                                        return this.renderObjects(v,k);
-                                    })
-                                }
-                                else if(key === 'weather'){
-
-                                    return _.map(value,(weather: Weather,key) => {
-
-                                        return(
-                                            <div className="alert alert-danger">
-                                                {_.map(weather, (v,k) => {
-                                                    return this.renderWeatherViewWeatherObject(v,k);
-                                                })}
-                                            </div>
-                                        );
-
-                                    });
-                                }
-
-                                else{
-                                    return <div className="alert alert-danger">iam else</div>
-                                }
-                            }
-                            else if(isNumber(value)){
-                                return this.renderWeatherViewNumber(value,key);
-                            }
-                            else{
-                                console.log('i am else', value,key)
-                            }
-                        })}
-
+                            <button
+                                onClick={this.performWeatherRequest}
+                            >get actual weather info</button>
+                            <button
+                                onClick={this.performWeatherForeCast}
+                            >forecast my city</button>
+                            <button
+                                onClick={this.resetComponent}
+                            >
+                                RESET
+                            </button>
+                        </form>
                     </div>
-                )}
+                    <br/>
 
-                {this.props.fetchWeatherResult.type === 'FETCH_WEATHER_FORECAST' && (
-                    <div> iam forecast result</div>
-                )}
+                    {/*https://stackoverflow.com/questions/21749798/how-can-i-reset-a-react-component-including-all-transitively-reachable-state/21750576#21750576*/}
+
+                    {/*TODO*/}
+                    {/*1. check response type (actual, forecast)*/}
+                    {/*2. render according to result differnt tiles*/}
+                    {/*3. ideal is to keep stateless components seperated*/}
+
+                    {type === 'FETCH_WEATHER_SUCCESS' && (
+                        <div key={Math.floor(Math.random() * 999) +1} className="weatheroutput">
+                            {_.map(this.props.fetchWeatherResult.result, (value,key ) => {
+
+                                if(isString(value)){
+                                    return this.renderWeatherViewString(value,key);
+                                }
+
+                                else if(isObject(value)){
+
+                                    if ((key !== 'weather') && !isNullOrUndefined(value)){
+                                        return _.map(value, (v,k) => {
+
+                                            return this.renderObjects(v,k);
+                                        })
+                                    }
+                                    else if(key === 'weather'){
+
+                                        return _.map(value,(weather: Weather,key) => {
+
+                                            return(
+                                                <div className="alert alert-danger">
+                                                    {_.map(weather, (v,k) => {
+                                                        return this.renderWeatherViewWeatherObject(v,k);
+                                                    })}
+                                                </div>
+                                            );
+
+                                        });
+                                    }
+
+                                    else{
+                                        return <div className="alert alert-danger">iam else</div>
+                                    }
+                                }
+                                else if(isNumber(value)){
+                                    return this.renderWeatherViewNumber(value,key);
+                                }
+                                else{
+                                    console.log('i am else', value,key)
+                                }
+                            })}
+
+                        </div>
+                    )}
+
+                    {type === 'FETCH_WEATHER_FORECAST' && (
+                        <div> iam forecast result
+                            {console.log(result)};
+                        </div>
+                    )}
 
 
 
-            </div>
-        );
+
+                </div>
+            );
+        }
+
+
+
+
+        //console.log('props___-',this.props);
+
     }
 }
 

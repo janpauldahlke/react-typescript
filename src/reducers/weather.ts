@@ -14,7 +14,7 @@ const initialStoreState : WeatherResultStoreState = {
 
 };
 
-export default handleActions<WeatherResultStoreState, WeatherResult>({
+export default handleActions<WeatherResultStoreState, WeatherResult | WeatherForeCastResult>({
     [Actions.FETCH_WEATHER_SUCCESS] : (state, action) => {
 
         let passReducer = {
@@ -22,7 +22,8 @@ export default handleActions<WeatherResultStoreState, WeatherResult>({
             type: 'FETCH_WEATHER_SUCCESS',
             load: false,
             success: true,
-            result:action.payload}
+            result:action.payload
+        };
         //console.log('in my reducer: ',passReducer)
         return passReducer;
     },
@@ -41,6 +42,16 @@ export default handleActions<WeatherResultStoreState, WeatherResult>({
             success: true,
             result: action.payload,
             type: 'FETCH_WEATHER_FORECAST'
+        }
+    },
+    [Actions.FETCH_WEATHER_RESET]: (state) => {
+        console.log('FETCH_WEATHER_RESET');
+        return {
+            ...state,
+            load: false,
+            success: true,
+            result: null,
+            type: 'FETCH_WEATHER_RESET'
         }
     }
 }, initialStoreState)

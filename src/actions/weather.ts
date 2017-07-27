@@ -17,9 +17,15 @@ export function getAxiosInstance() {
     });
 }
 
+export function resetWeather() {
+    return function (dispatch) {
+        dispatch(fetchWeatherReset());
+    }
+}
+
 export function fetchWeatherFunc(type: string, city: string, country: string = 'DEU') {
     return function(dispatch) {
-        dispatch(fetchWeatherAction);
+        dispatch(fetchWeatherAction());
         return getAxiosInstance().get(type, {params: {q: city + ',' + country, units:'metric'}})
             .then((response) => {
                 //console.log('1_ ACTION_ :fetchWeatherSuccess', response.data);
@@ -28,12 +34,13 @@ export function fetchWeatherFunc(type: string, city: string, country: string = '
                         dispatch(fetchWeatherSuccess(response.data));
                         break;
                     case "forecast":
-                        console.log('action forecast', response.data);
+                        //console.log('action forecast', response.data);
                         dispatch(fetchWeatherActionForecast(response.data));
                         break;
                     default:
                         dispatch(fetchWeatherSuccess(response.data));
                 }
+
             })
             .catch((error) => {
             dispatch(fetWeatherFailure(error.toString()))
@@ -46,7 +53,9 @@ export const fetchWeatherAction = createAction(Actions.FETCH_WEATHER_ACTION);
 export const fetchWeatherSuccess = createAction<WeatherResult>(Actions.FETCH_WEATHER_SUCCESS);
 export const fetWeatherFailure = createAction<any>(Actions.FETCH_WEATHER_FAILURE);
 
-export const fetchWeatherActionForecast = createAction<any>(Actions.FETCH_WEATHER_FORECAST);
+export const fetchWeatherActionForecast = createAction<WeatherForeCastResult>(Actions.FETCH_WEATHER_FORECAST);
+
+export const fetchWeatherReset = createAction(Actions.FETCH_WEATHER_RESET);
 
 
 //TODO reset action, that emptys payload
