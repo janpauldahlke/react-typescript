@@ -141,16 +141,16 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
                     {/*)}*/}
 
                     {/*<WeatherResult />*/}
-                    {_.map(this.props.fetchWeatherResult.result).map((e) => {
+                    {_.map(this.props.fetchWeatherResult.result, (k,v ) => {
 
                         counter = counter +1;
-                        console.log('rounds_', counter);
-                        if(isString(e)){
-                            console.log('string_', e);
-                            return this.renderWeatherViewString(e);
+                        //console.log('rounds_', counter);
+                        if(isString(k)){
+                            console.log('string_', k, v);
+                            /*return this.renderWeatherViewString(e);*/
                         }
-                        else if(isObject(e)){
-                            console.log('object__', e)
+                        else if(isObject(k)){
+                            console.log('object__', v,k)
 
                             //TODO find a way top compare deepequal with typescript types
 
@@ -163,13 +163,15 @@ export class Weather extends React.Component<Weather.Props, Weather.State> {
                             //     }
                             // })
                         }
-                        else if(isNumber(e)){
-                            console.log('number__', e);
-                            return this.renderWeatherViewNumber(e);
+                        else if(isNumber(k)){
+                            console.log('number__', k,v);
+                            //return this.renderWeatherViewNumber(e);
                         }
                         else{
-                            console.log('i am else', e)
+                            console.log('i am else', k,v)
                         }
+
+
                     })}
 
                 </div>
